@@ -118,12 +118,12 @@ Using **AWS RDS** offloads database management, backups, and scaling. It provide
 6. Image uploads handled by S3 with public read access.  
 7. AWS ACM ensures HTTPS for all communication.  
 
-**Ports Configuration:**.   
+<!-- **Ports Configuration:**.   
 
 | Service | Port | Description |
 |----------|------|--------------|
 | Frontend | 3000 | React web application |
 | Backend | 5000 | Node.js REST API |
-| RDS (PostgreSQL) | 5432 | Managed database connection |
+| RDS (PostgreSQL) | 5432 | Managed database connection | -->
 
 ---
