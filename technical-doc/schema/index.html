@@ -1,0 +1,1665 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../tech-stack/">
+      
+      
+        <link rel="next" href="../arch/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Schema Design - CivicTrack Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#civictrack-database-schema-design-document" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="CivicTrack Documentation" class="md-header__button md-logo" aria-label="CivicTrack Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CivicTrack Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Schema Design
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="CivicTrack Documentation" class="md-nav__button md-logo" aria-label="CivicTrack Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    CivicTrack Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Functional Document
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usecase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use Case Document
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Document
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Technical Document
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tech-stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tech Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schema Design
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schema Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#2-entity-relationship-diagram-erd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Entity Relationship Diagram (ERD)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-core-tables-and-relationships" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Core Tables and Relationships
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Core Tables and Relationships">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 users
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 roles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-user_role" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 user_role
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-authorities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 authorities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-authority_user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 authority_user
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-user_issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7 user_issue
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#38-issue_images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.8 issue_images
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#39-flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.9 flags
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#310-user_issue_flag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.10 user_issue_flag
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#311-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.11 logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-enums-and-status-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. ENUMs and Status Definitions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. ENUMs and Status Definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example SQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-index-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Index Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dfd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Flow Diagrams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Authentication/Authorization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#2-entity-relationship-diagram-erd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Entity Relationship Diagram (ERD)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-core-tables-and-relationships" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Core Tables and Relationships
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Core Tables and Relationships">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 users
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 roles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-user_role" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 user_role
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-authorities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 authorities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-authority_user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 authority_user
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-user_issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7 user_issue
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#38-issue_images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.8 issue_images
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#39-flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.9 flags
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#310-user_issue_flag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.10 user_issue_flag
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#311-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.11 logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-enums-and-status-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. ENUMs and Status Definitions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. ENUMs and Status Definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example SQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-index-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Index Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="civictrack-database-schema-design-document"><strong>CivicTrack Database Schema Design Document</strong></h1>
+<h2 id="2-entity-relationship-diagram-erd"><strong>2. Entity Relationship Diagram (ERD)</strong></h2>
+<p><img alt="ERD" src="../../images/civictrack-erd.png" /></p>
+<p>The ERD represents relationships between <strong>users</strong>, <strong>roles</strong>, <strong>issues</strong>, <strong>authorities</strong>, <strong>flags</strong>, and <strong>logs</strong>.<br />
+It forms the backbone of the data model for CivicTrack.</p>
+<hr />
+<h2 id="3-core-tables-and-relationships"><strong>3. Core Tables and Relationships</strong></h2>
+<h4 id="31-users"><strong>3.1 users</strong></h4>
+<p>Stores all registered platform users.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>BIGINT</td>
+<td>PK</td>
+<td>Unique user ID</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>VARCHAR(100)</td>
+<td>NOT NULL</td>
+<td>User’s full name</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>VARCHAR(150)</td>
+<td>UNIQUE, NOT NULL</td>
+<td>User’s email for login</td>
+</tr>
+<tr>
+<td><code>password_hash</code></td>
+<td>VARCHAR(255)</td>
+<td>NOT NULL</td>
+<td>Encrypted password (bcrypt)</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>TIMESTAMPTZ</td>
+<td>DEFAULT now()</td>
+<td>Creation timestamp</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>TIMESTAMPTZ</td>
+<td>DEFAULT now()</td>
+<td>Last modification</td>
+</tr>
+<tr>
+<td><code>deleted_at</code></td>
+<td>TIMESTAMPTZ</td>
+<td>NULLABLE</td>
+<td>Soft delete marker</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="32-roles"><strong>3.2 roles</strong></h3>
+<p>Defines all available roles within the system.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>BIGINT</td>
+<td>PK</td>
+<td>Unique role ID</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>VARCHAR(50)</td>
+<td>UNIQUE, NOT NULL</td>
+<td>Role name (citizen, authority, admin)</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>TEXT</td>
+<td>NULL</td>
+<td>Description of the role</td>
+</tr>
+<tr>
+<td><code>is_active</code></td>
+<td>BOOLEAN</td>
+<td>DEFAULT TRUE</td>
+<td>Role availability</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>TIMESTAMPTZ</td>
+<td>DEFAULT now()</td>
+<td>Creation timestamp</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>TIMESTAMPTZ</td>
+<td>DEFAULT now()</td>
+<td>Last update timestamp</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="33-user_role"><strong>3.3 user_role</strong></h3>
+<p>Mapping table linking users with their assigned roles.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Constraints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>BIGINT</td>
+<td>PK</td>
+</tr>
+<tr>
+<td><code>user_id</code></td>
+<td>BIGINT</td>
+<td>FK → <code>users.id</code>, NOT NULL</td>
+</tr>
+<tr>
+<td><code>role_id</code></td>
+<td>BIGINT</td>
+<td>FK → <code>roles.id</code>, NOT NULL</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>TIMESTAMPTZ</td>
+<td>DEFAULT now()</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>TIMESTAMPTZ</td>
+<td>DEFAULT now()</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="34-authorities"><strong>3.4 authorities</strong></h3>
+<p>Stores each civic department or administrative authority.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>BIGINT</td>
+<td>PK</td>
+<td>Authority ID</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>VARCHAR(150)</td>
+<td>NOT NULL</td>
+<td>Authority or department name</td>
+</tr>
+<tr>
+<td><code>city</code></td>
+<td>VARCHAR(100)</td>
+<td>NOT NULL</td>
+<td>City or jurisdiction</td>
+</tr>
+<tr>
+<td><code>region</code></td>
+<td>VARCHAR(100)</td>
+<td>NOT NULL</td>
+<td>Area of operation</td>
+</tr>
+<tr>
+<td><code>department_id</code></td>
+<td>BIGINT</td>
+<td>FK → <code>departments.id</code></td>
+<td>Linked department</td>
+</tr>
+<tr>
+<td><code>address</code></td>
+<td>TEXT</td>
+<td>NULL</td>
+<td>Physical address</td>
+</tr>
+<tr>
+<td><code>coverage_area</code></td>
+<td>GEOGRAPHY(Polygon)</td>
+<td>NULL</td>
+<td>Geo-boundary</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>TIMESTAMPTZ</td>
+<td>DEFAULT now()</td>
+<td>Created date</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>TIMESTAMPTZ</td>
+<td>DEFAULT now()</td>
+<td>Updated date</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="35-authority_user"><strong>3.5 authority_user</strong></h3>
+<p>Links specific users to their respective authorities.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Constraints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>BIGINT</td>
+<td>PK</td>
+</tr>
+<tr>
+<td><code>authority_id</code></td>
+<td>BIGINT</td>
+<td>FK → <code>authorities.id</code>, NOT NULL</td>
+</tr>
+<tr>
+<td><code>user_id</code></td>
+<td>BIGINT</td>
+<td>FK → <code>users.id</code>, UNIQUE, NOT NULL</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>TIMESTAMPTZ</td>
+<td>DEFAULT now()</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>TIMESTAMPTZ</td>
+<td>DEFAULT now()</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="36-issues"><strong>3.6 issues</strong></h3>
+<p>Stores predefined issue categories (e.g., Roads, Water, Lighting).</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Constraints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>BIGINT</td>
+<td>PK</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>VARCHAR(100)</td>
+<td>UNIQUE, NOT NULL</td>
+</tr>
+<tr>
+<td><code>slug</code></td>
+<td>VARCHAR(100)</td>
+<td>UNIQUE, NOT NULL</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>TEXT</td>
+<td>NULL</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="37-user_issue"><strong>3.7 user_issue</strong></h3>
+<p>Stores user-submitted civic issues.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>BIGINT</td>
+<td><strong>PK</strong></td>
+<td>Unique issue ID.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>VARCHAR(255)</td>
+<td><strong>NOT NULL</strong></td>
+<td>Title of the reported issue.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>TEXT</td>
+<td><strong>NOT NULL</strong></td>
+<td>Detailed description of the issue.</td>
+</tr>
+<tr>
+<td><code>issue_id</code></td>
+<td>BIGINT</td>
+<td><strong>FK → issues.id</strong>, NOT NULL</td>
+<td>References the type/category of the issue.</td>
+</tr>
+<tr>
+<td><code>reporter_id</code></td>
+<td>BIGINT</td>
+<td><strong>FK → users.id</strong>, NOT NULL</td>
+<td>ID of the user who reported the issue.</td>
+</tr>
+<tr>
+<td><code>authority_id</code></td>
+<td>BIGINT</td>
+<td><strong>FK → authorities.id</strong></td>
+<td>ID of the authority assigned to handle this issue.</td>
+</tr>
+<tr>
+<td><code>latitude</code></td>
+<td>DOUBLE PRECISION</td>
+<td>NULL</td>
+<td>Latitude coordinate of the issue’s location.</td>
+</tr>
+<tr>
+<td><code>longitude</code></td>
+<td>DOUBLE PRECISION</td>
+<td>NULL</td>
+<td>Longitude coordinate of the issue’s location.</td>
+</tr>
+<tr>
+<td><code>region</code></td>
+<td>VARCHAR(100)</td>
+<td>NULL</td>
+<td>Optional city or area name.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>ENUM('reported', 'in_progress', 'resolved')</td>
+<td>DEFAULT <code>'reported'</code></td>
+<td>Represents the issue’s lifecycle stage.</td>
+</tr>
+<tr>
+<td><code>is_hidden</code></td>
+<td>BOOLEAN</td>
+<td>DEFAULT FALSE</td>
+<td>Marks whether the issue is hidden due to admin moderation or flags.</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>TIMESTAMPTZ</td>
+<td>DEFAULT <code>now()</code></td>
+<td>Timestamp of when the issue was created.</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>TIMESTAMPTZ</td>
+<td>DEFAULT <code>now()</code></td>
+<td>Timestamp of the most recent update.</td>
+</tr>
+<tr>
+<td><code>deleted_at</code></td>
+<td>TIMESTAMPTZ</td>
+<td>NULLABLE</td>
+<td>Soft deletion timestamp for archival or recovery.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="38-issue_images"><strong>3.8 issue_images</strong></h3>
+<p>Stores image URLs related to user-reported issues.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Constraints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>BIGINT</td>
+<td>PK</td>
+</tr>
+<tr>
+<td><code>report_id</code></td>
+<td>BIGINT</td>
+<td>FK → <code>user_issue.id</code>, NOT NULL</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>TEXT</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>TIMESTAMPTZ</td>
+<td>DEFAULT now()</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="39-flags"><strong>3.9 flags</strong></h3>
+<p>Defines flag categories for moderation (e.g., spam, duplicate).</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Constraints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>BIGINT</td>
+<td>PK</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>VARCHAR(100)</td>
+<td>UNIQUE, NOT NULL</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>TEXT</td>
+<td>NULL</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="310-user_issue_flag"><strong>3.10 user_issue_flag</strong></h3>
+<p>Tracks flags applied by users to reported issues.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Constraints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>BIGINT</td>
+<td>PK</td>
+</tr>
+<tr>
+<td><code>report_id</code></td>
+<td>BIGINT</td>
+<td>FK → <code>user_issue.id</code>, NOT NULL</td>
+</tr>
+<tr>
+<td><code>user_id</code></td>
+<td>BIGINT</td>
+<td>FK → <code>users.id</code>, NOT NULL</td>
+</tr>
+<tr>
+<td><code>flag_id</code></td>
+<td>BIGINT</td>
+<td>FK → <code>flags.id</code>, NOT NULL</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>TIMESTAMPTZ</td>
+<td>DEFAULT now()</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>TIMESTAMPTZ</td>
+<td>DEFAULT now()</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="311-logs"><strong>3.11 logs</strong></h3>
+<p>Stores historical changes for issue status updates and comments.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Constraints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>BIGINT</td>
+<td>PK</td>
+</tr>
+<tr>
+<td><code>issue_id</code></td>
+<td>BIGINT</td>
+<td>FK → <code>user_issue.id</code>, NOT NULL</td>
+</tr>
+<tr>
+<td><code>updated_by</code></td>
+<td>BIGINT</td>
+<td>FK → <code>users.id</code>, NOT NULL</td>
+</tr>
+<tr>
+<td><code>from_status</code></td>
+<td>VARCHAR(30)</td>
+<td>NULL</td>
+</tr>
+<tr>
+<td><code>to_status</code></td>
+<td>VARCHAR(30)</td>
+<td>NULL</td>
+</tr>
+<tr>
+<td><code>comment</code></td>
+<td>TEXT</td>
+<td>NULL</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>TIMESTAMPTZ</td>
+<td>DEFAULT now()</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>TIMESTAMPTZ</td>
+<td>DEFAULT now()</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-enums-and-status-definitions"><strong>4. ENUMs and Status Definitions</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Enum Type</th>
+<th>Values</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>issue_status</code></td>
+<td><code>('reported', 'in_progress', 'resolved')</code></td>
+<td>Defines the issue lifecycle</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example-sql"><strong>Example SQL</strong></h4>
+<pre><code class="language-sql">CREATE TYPE issue_status AS ENUM ('reported', 'in_progress', 'resolved');
+</code></pre>
+<hr />
+<h2 id="6-index-summary"><strong>6. Index Summary</strong></h2>
+<table>
+<thead>
+<tr>
+<th><strong>Table</strong></th>
+<th><strong>Index Name</strong></th>
+<th><strong>Index Type</strong></th>
+<th><strong>Columns</strong></th>
+<th><strong>Purpose / Use Case</strong></th>
+<th><strong>SQL Example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>users</code></td>
+<td><code>idx_users_email_unique</code></td>
+<td>UNIQUE (BTREE)</td>
+<td><code>email</code></td>
+<td>Prevent duplicate user accounts and speed up authentication</td>
+<td><code>CREATE UNIQUE INDEX idx_users_email_unique ON users(email);</code></td>
+</tr>
+<tr>
+<td><code>user_issue</code></td>
+<td><code>idx_user_issue_status</code></td>
+<td>BTREE</td>
+<td><code>status</code></td>
+<td>Quickly filter issues by status (<code>reported</code>, <code>in_progress</code>, <code>resolved</code>)</td>
+<td><code>CREATE INDEX idx_user_issue_status ON user_issue(status);</code></td>
+</tr>
+<tr>
+<td><code>user_issue</code></td>
+<td><code>idx_user_issue_authority_status</code></td>
+<td>COMPOSITE (BTREE)</td>
+<td><code>authority_id, status</code></td>
+<td>Speed up authority dashboards when filtering issues by both status and assigned authority</td>
+<td><code>CREATE INDEX idx_user_issue_authority_status ON user_issue(authority_id, status);</code></td>
+</tr>
+<tr>
+<td><code>user_issue</code></td>
+<td><code>idx_user_issue_lat_lon</code></td>
+<td>COMPOSITE (BTREE)</td>
+<td><code>latitude, longitude</code></td>
+<td>Optimize location-based search using bounding box + Haversine queries</td>
+<td><code>CREATE INDEX idx_user_issue_lat_lon ON user_issue(latitude, longitude);</code></td>
+</tr>
+<tr>
+<td><code>roles</code></td>
+<td><code>idx_roles_name_unique</code></td>
+<td>UNIQUE (BTREE)</td>
+<td><code>name</code></td>
+<td>Ensure no duplicate roles exist in the system</td>
+<td><code>CREATE UNIQUE INDEX idx_roles_name_unique ON roles(name);</code></td>
+</tr>
+<tr>
+<td><code>issues</code></td>
+<td><code>idx_issues_slug_unique</code></td>
+<td>UNIQUE (BTREE)</td>
+<td><code>slug</code></td>
+<td>Ensure issue category slugs are unique and URL-safe</td>
+<td><code>CREATE UNIQUE INDEX idx_issues_slug_unique ON issues(slug);</code></td>
+</tr>
+<tr>
+<td><code>user_role</code></td>
+<td><code>idx_user_role_unique</code></td>
+<td>UNIQUE COMPOSITE (BTREE)</td>
+<td><code>user_id, role_id</code></td>
+<td>Prevent assigning the same role to a user more than once</td>
+<td><code>CREATE UNIQUE INDEX idx_user_role_unique ON user_role(user_id, role_id);</code></td>
+</tr>
+<tr>
+<td><code>authority_user</code></td>
+<td><code>idx_authority_user_unique</code></td>
+<td>UNIQUE COMPOSITE (BTREE)</td>
+<td><code>authority_id, user_id</code></td>
+<td>Enforce one-to-one mapping between authority and user account</td>
+<td><code>CREATE UNIQUE INDEX idx_authority_user_unique ON authority_user(authority_id, user_id);</code></td>
+</tr>
+<tr>
+<td><code>logs</code></td>
+<td><code>idx_logs_issue_id</code></td>
+<td>BTREE</td>
+<td><code>issue_id</code></td>
+<td>Fetch issue logs quickly for timelines and history views</td>
+<td><code>CREATE INDEX idx_logs_issue_id ON logs(issue_id);</code></td>
+</tr>
+<tr>
+<td><code>logs</code></td>
+<td><code>idx_logs_user_activity</code></td>
+<td>COMPOSITE (BTREE)</td>
+<td><code>updated_by, created_at</code></td>
+<td>Track user actions chronologically for analytical or admin audit purposes</td>
+<td><code>CREATE INDEX idx_logs_user_activity ON logs(updated_by, created_at);</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>
