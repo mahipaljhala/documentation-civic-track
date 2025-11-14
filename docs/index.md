@@ -130,7 +130,7 @@ Citizen receives updated status.
 
 #### **Scalability**
 - Stateless API supports horizontal scaling on EC2.  
-- Database connection pooling for high concurrency.
+<!-- - Database connection pooling for high concurrency. -->
 
 #### **Security**
 - HTTPS enforced via AWS Certificate Manager.  
@@ -139,7 +139,7 @@ Citizen receives updated status.
 
 #### **Performance**
 - Indexed database queries for fast filtering.  
-- Pre-signed URLs minimize API load for file transfers.
+<!-- - Pre-signed URLs minimize API load for file transfers. -->
 
 #### **Usability**
 - Responsive and intuitive UI for all roles.  
