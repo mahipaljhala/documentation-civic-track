@@ -1,0 +1,20 @@
+site_name: CivicTrack Documentation
+
+nav:
+  - Functional Document: index.md
+  - Use Case Document: usecase.md
+  - Technical Document: 
+    - Tech Stack: ./technical-doc/tech-stack.md
+    - Schema Design: ./technical-doc/schema.md
+    - Architecture: ./technical-doc/arch.md
+    - Data Flow Diagrams: ./technical-doc/dfd.md
+    - Authentication/Authorization: ./technical-doc/auth.md
+    - Test Plan: ./technical-doc/test.md
+    # - Api Endpoints: ./technical-doc/endpoint.md
+
+theme:
+  name: material
+
+
+
+
