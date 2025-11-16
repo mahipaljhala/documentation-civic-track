@@ -465,43 +465,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-system-flow-overview" class="md-nav__link">
+  <a href="#6-non-functional-considerations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6) System Flow Overview
+        6) Non-Functional Considerations
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="6) System Flow Overview">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-non-functional-considerations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7) Non-Functional Considerations
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="7) Non-Functional Considerations">
+    <nav class="md-nav" aria-label="6) Non-Functional Considerations">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -554,10 +526,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-security-overview" class="md-nav__link">
+  <a href="#7-security-overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        8) Security Overview
+        7) Security Overview
       
     </span>
   </a>
@@ -565,10 +537,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#9-future-vision" class="md-nav__link">
+  <a href="#8-future-vision" class="md-nav__link">
     <span class="md-ellipsis">
       
-        9) Future Vision
+        8) Future Vision
       
     </span>
   </a>
@@ -1070,43 +1042,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-system-flow-overview" class="md-nav__link">
+  <a href="#6-non-functional-considerations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6) System Flow Overview
+        6) Non-Functional Considerations
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="6) System Flow Overview">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-non-functional-considerations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7) Non-Functional Considerations
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="7) Non-Functional Considerations">
+    <nav class="md-nav" aria-label="6) Non-Functional Considerations">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1159,10 +1103,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-security-overview" class="md-nav__link">
+  <a href="#7-security-overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        8) Security Overview
+        7) Security Overview
       
     </span>
   </a>
@@ -1170,10 +1114,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#9-future-vision" class="md-nav__link">
+  <a href="#8-future-vision" class="md-nav__link">
     <span class="md-ellipsis">
       
-        9) Future Vision
+        8) Future Vision
       
     </span>
   </a>
@@ -1316,15 +1260,20 @@ Existing reporting systems are inefficient and non-transparent, causing delays a
 <li><strong>Route 53</strong> – Domain and DNS management.</li>
 </ul>
 <hr />
-<h2 id="6-system-flow-overview"><strong>6) System Flow Overview</strong></h2>
-<p><img alt="systemflow" src="images/systemflow.png" /></p>
-<h4 id="example"><strong>Example</strong></h4>
-<p>A citizen reports a garbage issue →   <br />
-System assigns it to Sanitation Authority →   <br />
-Authority marks it <em>In Progress</em> → then <em>Resolved</em> →   <br />
-Citizen receives updated status.</p>
-<hr />
-<h2 id="7-non-functional-considerations"><strong>7) Non-Functional Considerations</strong></h2>
+<!-- ## **6) System Flow Overview**
+[link](./technical-doc/dfd.md)
+![systemflow](./images/systemflow.png)
+
+
+#### **Example**
+A citizen reports a garbage issue →     
+System assigns it to Sanitation Authority →     
+Authority marks it *In Progress* → then *Resolved* →     
+Citizen receives updated status.
+
+--- -->
+
+<h2 id="6-non-functional-considerations"><strong>6) Non-Functional Considerations</strong></h2>
 <h4 id="scalability"><strong>Scalability</strong></h4>
 <ul>
 <li>Stateless API supports horizontal scaling on EC2.  </li>
@@ -1349,7 +1298,7 @@ Citizen receives updated status.</p>
 <li>Consistent navigation and clear dashboards.</li>
 </ul>
 <hr />
-<h2 id="8-security-overview"><strong>8) Security Overview</strong></h2>
+<h2 id="7-security-overview"><strong>7) Security Overview</strong></h2>
 <ul>
 <li>All communication over HTTPS (SSL from AWS ACM).  </li>
 <li>Cookies used for session authentication.  </li>
@@ -1361,15 +1310,18 @@ Citizen receives updated status.</p>
 <li><code>5432</code> → Private DB access only</li>
 </ul>
 <hr />
-<h2 id="9-future-vision"><strong>9) Future Vision</strong></h2>
+<h2 id="8-future-vision"><strong>8) Future Vision</strong></h2>
 <ul>
 <li>Push notifications for live updates.  </li>
 <li>Analytics dashboard for administrators.  </li>
-<li>OAuth/SSO login integration.  </li>
+</ul>
+<!-- - OAuth/SSO login integration.   -->
+<ul>
 <li>Refresh tokens for persistent sessions.  </li>
 <li>Two-Factor Authentication (2FA) for admins.</li>
-<li>Geolocation filtering of issue.</li>
 </ul>
+<!-- - Geolocation filtering of issue. -->
+
 <hr />
 
 

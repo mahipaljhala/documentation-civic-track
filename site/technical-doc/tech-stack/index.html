@@ -414,10 +414,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-deployment-devops-setup" class="md-nav__link">
+  <a href="#6-security-best-practices" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Deployment &amp; DevOps Setup
+        6. Security &amp; Best Practices
       
     </span>
   </a>
@@ -425,26 +425,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-security-best-practices" class="md-nav__link">
+  <a href="#7-system-deployment-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        8. Security &amp; Best Practices
+        7. System Deployment Workflow
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#9-system-deployment-workflow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        9. System Deployment Workflow
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="9. System Deployment Workflow">
+    <nav class="md-nav" aria-label="7. System Deployment Workflow">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -701,10 +690,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-deployment-devops-setup" class="md-nav__link">
+  <a href="#6-security-best-practices" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Deployment &amp; DevOps Setup
+        6. Security &amp; Best Practices
       
     </span>
   </a>
@@ -712,26 +701,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-security-best-practices" class="md-nav__link">
+  <a href="#7-system-deployment-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        8. Security &amp; Best Practices
+        7. System Deployment Workflow
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#9-system-deployment-workflow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        9. System Deployment Workflow
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="9. System Deployment Workflow">
+    <nav class="md-nav" aria-label="7. System Deployment Workflow">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -954,35 +932,20 @@ Using <strong>AWS RDS</strong> offloads database management, backups, and scalin
 - RDS Security Group allows inbound connections <strong>only</strong> from the EC2 instance’s private IP.<br />
 - Database credentials are stored securely in the <code>.env</code> file and loaded at runtime.  </p>
 <hr />
-<h2 id="6-deployment-devops-setup"><strong>6. Deployment &amp; DevOps Setup</strong></h2>
-<table>
-<thead>
-<tr>
-<th><strong>Tool / Process</strong></th>
-<th><strong>Purpose</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Docker</strong></td>
-<td>Containerizes both backend and frontend for consistent environments.</td>
-</tr>
-<tr>
-<td><strong>Docker Compose</strong></td>
-<td>Orchestrates all services (frontend, backend) together.</td>
-</tr>
-<tr>
-<td><strong>Environment Variables (.env)</strong></td>
-<td>Holds credentials for JWT, AWS, and database.</td>
-</tr>
-<tr>
-<td><strong>Restart Policy</strong></td>
-<td>Docker automatically restarts containers (<code>restart: always</code>).</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="8-security-best-practices"><strong>8. Security &amp; Best Practices</strong></h2>
+<!-- 
+## **6. Deployment & DevOps Setup**
+
+| **Tool / Process** | **Purpose** |
+|----------------------|-------------|
+| **Docker** | Containerizes both backend and frontend for consistent environments. |
+| **Docker Compose** | Orchestrates all services (frontend, backend) together. |
+| **Environment Variables (.env)** | Holds credentials for JWT, AWS, and database. |
+| **Restart Policy** | Docker automatically restarts containers (`restart: always`). |
+ -->
+
+<!-- --- -->
+
+<h2 id="6-security-best-practices"><strong>6. Security &amp; Best Practices</strong></h2>
 <table>
 <thead>
 <tr>
@@ -1018,7 +981,7 @@ Using <strong>AWS RDS</strong> offloads database management, backups, and scalin
 - Connection limited to private subnet within VPC.<br />
 - Parameter groups configured for optimized performance.  </p>
 <hr />
-<h2 id="9-system-deployment-workflow"><strong>9. System Deployment Workflow</strong></h2>
+<h2 id="7-system-deployment-workflow"><strong>7. System Deployment Workflow</strong></h2>
 <h3 id="step-by-step-deployment-flow"><strong>Step-by-Step Deployment Flow</strong></h3>
 <ol>
 <li>Code pushed to GitHub repository.  </li>
