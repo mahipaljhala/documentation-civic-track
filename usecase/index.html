@@ -283,10 +283,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-overview" class="md-nav__link">
+  <a href="#1-use-case-diagram" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1) Overview
+        1) Use Case Diagram
       
     </span>
   </a>
@@ -305,26 +305,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-use-case-diagram" class="md-nav__link">
+  <a href="#3-use-cases" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3) Use Case Diagram
+        3) Use Cases
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-use-cases" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4) Use Cases
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4) Use Cases">
+    <nav class="md-nav" aria-label="3) Use Cases">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -421,32 +410,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-exception-scenarios" class="md-nav__link">
+  <a href="#4-error-scenarios" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5) Exception Scenarios
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-postconditions-summary" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6) Postconditions Summary
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-assumptions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7) Assumptions
+        4) Error Scenarios
       
     </span>
   </a>
@@ -710,10 +677,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-overview" class="md-nav__link">
+  <a href="#1-use-case-diagram" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1) Overview
+        1) Use Case Diagram
       
     </span>
   </a>
@@ -732,26 +699,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-use-case-diagram" class="md-nav__link">
+  <a href="#3-use-cases" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3) Use Case Diagram
+        3) Use Cases
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-use-cases" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4) Use Cases
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4) Use Cases">
+    <nav class="md-nav" aria-label="3) Use Cases">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -848,32 +804,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-exception-scenarios" class="md-nav__link">
+  <a href="#4-error-scenarios" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5) Exception Scenarios
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-postconditions-summary" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6) Postconditions Summary
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-assumptions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7) Assumptions
+        4) Error Scenarios
       
     </span>
   </a>
@@ -899,9 +833,8 @@
 
 <h1 id="civictrack-use-case-document"><strong>CivicTrack Use Case Document</strong></h1>
 <hr />
-<h2 id="1-overview"><strong>1) Overview</strong></h2>
-<p>This document describes the <strong>primary system interactions (use cases)</strong> of the CivicTrack application.<br />
-Each use case defines the participating actors, system behavior, and expected outcomes.</p>
+<h2 id="1-use-case-diagram"><strong>1) Use Case Diagram</strong></h2>
+<p><img alt="usecasediagram" src="../images/image.png" /></p>
 <hr />
 <h2 id="2-actors"><strong>2) Actors</strong></h2>
 <table>
@@ -931,10 +864,7 @@ Each use case defines the participating actors, system behavior, and expected ou
 </tbody>
 </table>
 <hr />
-<h2 id="3-use-case-diagram"><strong>3) Use Case Diagram</strong></h2>
-<p><img alt="usecasediagram" src="../images/image.png" /></p>
-<hr />
-<h2 id="4-use-cases"><strong>4) Use Cases</strong></h2>
+<h2 id="3-use-cases"><strong>3) Use Cases</strong></h2>
 <h4 id="uc-01-register-user"><strong>UC-01: Register User</strong></h4>
 <p><strong>Actor:</strong> Citizen<br />
 <strong>Goal:</strong> To create a new user account.<br />
@@ -1023,95 +953,211 @@ Each use case defines the participating actors, system behavior, and expected ou
   5. User must log in again using the new password.<br />
 <strong>Postcondition:</strong> Password changed and user re-authenticated.</p>
 <hr />
-<h2 id="5-exception-scenarios"><strong>5) Exception Scenarios</strong></h2>
+<h2 id="4-error-scenarios"><strong>4) Error Scenarios</strong></h2>
 <table>
 <thead>
 <tr>
 <th>Use Case</th>
-<th>Exception</th>
+<th>Error Scenario</th>
 <th>System Response</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Register / Login</td>
-<td>Invalid input</td>
-<td>Display error message</td>
+<td><strong>UC-01: Register User</strong></td>
+<td>Email already exists</td>
+<td>Return <code>409 Conflict</code> → “Email already in use”</td>
 </tr>
 <tr>
-<td>Report Issue</td>
-<td>Missing data or invalid image</td>
-<td>Prompt user to correct input</td>
+<td></td>
+<td>Invalid input (name/email/password)</td>
+<td>Display validation error</td>
 </tr>
 <tr>
-<td>Update Status</td>
-<td>Unauthorized user</td>
+<td></td>
+<td>Weak password</td>
+<td>“Password must meet security requirements”</td>
+</tr>
+<tr>
+<td></td>
+<td>Missing required fields</td>
+<td>“Please fill all required fields”</td>
+</tr>
+<tr>
+<td><strong>UC-02: Login</strong></td>
+<td>Wrong email or password</td>
+<td>“Invalid credentials”</td>
+</tr>
+<tr>
+<td></td>
+<td>Missing email/password</td>
+<td>Validation error</td>
+</tr>
+<tr>
+<td><strong>UC-03: Report Issue</strong></td>
+<td>Missing title/category/location</td>
+<td>Ask user to complete all fields</td>
+</tr>
+<tr>
+<td></td>
+<td>Invalid or corrupted image</td>
+<td>“Upload a valid image file”</td>
+</tr>
+<tr>
+<td></td>
+<td>User not logged in</td>
+<td>Return <code>401 Unauthorized</code></td>
+</tr>
+<tr>
+<td><strong>UC-04: Update Issue Status</strong></td>
+<td>Unauthorized user (not assigned authority)</td>
 <td>Return <code>403 Forbidden</code></td>
 </tr>
 <tr>
-<td>Change Password</td>
-<td>Wrong current password</td>
-<td>Return error “Invalid credentials”</td>
+<td></td>
+<td>Issue does not exist</td>
+<td>Return <code>404 Not Found</code></td>
 </tr>
 <tr>
-<td>Flag Issue</td>
+<td><strong>UC-05: Flag Issue</strong></td>
 <td>Duplicate flag by same user</td>
-<td>Reject and notify “Already flagged”</td>
+<td>“You have already flagged this issue”</td>
+</tr>
+<tr>
+<td></td>
+<td>Issue does not exist</td>
+<td><code>404 Not Found</code></td>
+</tr>
+<tr>
+<td></td>
+<td>User not logged in</td>
+<td><code>401 Unauthorized</code></td>
+</tr>
+<tr>
+<td><strong>UC-06: Review Flagged Issues (Admin)</strong></td>
+<td>Admin not logged in</td>
+<td><code>401 Unauthorized</code></td>
+</tr>
+<tr>
+<td></td>
+<td>Flag entry does not exist</td>
+<td><code>404 Not Found</code></td>
+</tr>
+<tr>
+<td></td>
+<td>Issue already deleted</td>
+<td>“Issue no longer available”</td>
+</tr>
+<tr>
+<td><strong>UC-07: Manage Users (Admin)</strong></td>
+<td>Invalid role assignment</td>
+<td><code>400 Bad Request</code></td>
+</tr>
+<tr>
+<td></td>
+<td>User does not exist</td>
+<td><code>404 Not Found</code></td>
+</tr>
+<tr>
+<td><strong>UC-08: Change Password</strong></td>
+<td>Wrong current password</td>
+<td>“Invalid current password”</td>
+</tr>
+<tr>
+<td></td>
+<td>New password and confirm password mismatch</td>
+<td>“Passwords do not match”</td>
+</tr>
+<tr>
+<td></td>
+<td>Weak new password</td>
+<td>“Password must meet security requirements”</td>
+</tr>
+<tr>
+<td></td>
+<td>Missing fields</td>
+<td>Validation error</td>
+</tr>
+<tr>
+<td></td>
+<td>New password same as old password</td>
+<td>“New password cannot be same as old password”</td>
 </tr>
 </tbody>
 </table>
+<!-- | Use Case | Error Scenario | System Response |
+|----------|--------------------|-----------------|
+| **UC-01: Register User** | Email already exists | Return `409 Conflict` → “Email already in use” |
+| | Invalid input (name/email/password) | Display validation error |
+| | Weak password | “Password must meet security requirements” |
+| | Missing required fields | “Please fill all required fields” |
+| | DB write failure | Return `500 Internal Server Error` |
+| | Email format invalid | “Enter a valid email” | 
+| **UC-02: Login** | Wrong email or password | “Invalid credentials” |
+| | User account deleted/deactivated | Return `403 Forbidden` |
+| | Missing email/password | Validation error |
+| | Invalid cookie/session | “Session expired, login again” |
+| | Database offline | `500 Internal Server Error` |
+| **UC-03: Report Issue** | Missing title/category/location | Ask user to complete all fields |
+| | Invalid or corrupted image | “Upload a valid image file” |
+| | S3 upload failure | Return `500` → “Image upload failed” |
+| | User not logged in | Return `401 Unauthorized` |
+| | Invalid coordinates | “Invalid location data” |
+| | Issue category doesn’t exist | Return `400 Bad Request` |
+| | DB insertion failure | Return `500 Internal Server Error` |
+| **UC-04: Update Issue Status** | Unauthorized user (not assigned authority) | Return `403 Forbidden` |
+| | Issue does not exist | Return `404 Not Found` |
+| | Invalid status value | Return `400 Bad Request` |
+| | Trying to update an already resolved issue | “Issue already resolved” |
+| | Logs table insert fails | Return `500 Internal Server Error` |
+| **UC-05: Flag Issue** | Duplicate flag by same user | “You have already flagged this issue” |
+| | Issue does not exist | `404 Not Found` |
+| | Invalid flag type | `400 Bad Request` |
+| | User not logged in | `401 Unauthorized` |
+| | Flag limit reached | Auto-hide triggered, notify user |
+| **UC-06: Review Flagged Issues (Admin)** | Admin not logged in | `401 Unauthorized` |
+| | Admin role missing | `403 Forbidden` |
+| | Flag entry does not exist | `404 Not Found` |
+| | Issue already deleted | “Issue no longer available” |
+| | DB update failure | `500 Internal Server Error` |
+| **UC-07: Manage Users (Admin)** | Invalid role assignment | `400 Bad Request` |
+| | User does not exist | `404 Not Found` |
+| | Admin trying to remove own admin access | “Operation not allowed” |
+| | Role already assigned | “Role already exists for this user” |
+| | Unauthorized (non-admin) | `403 Forbidden` |
+| | DB save failure | `500 Internal Server Error` |
+| **UC-08: Change Password** | Wrong current password | “Invalid current password” |
+| | New password and confirm password mismatch | “Passwords do not match” |
+| | Weak new password | “Password must meet security requirements” |
+| | Missing fields | Validation error |
+| | User not logged in | `401 Unauthorized` |
+| | Account deleted/deactivated | `403 Forbidden` |
+| | Database update failure | `500 Internal Server Error` |
+| | New password same as old password | “New password cannot be same as old password” |
+| | Hashing failure (bcrypt error) | `500 Internal Server Error` | -->
+
 <hr />
-<h2 id="6-postconditions-summary"><strong>6) Postconditions Summary</strong></h2>
-<table>
-<thead>
-<tr>
-<th>Use Case</th>
-<th>Result</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>UC-01</td>
-<td>User account created</td>
-</tr>
-<tr>
-<td>UC-02</td>
-<td>Session started (cookie issued)</td>
-</tr>
-<tr>
-<td>UC-03</td>
-<td>Issue created in DB</td>
-</tr>
-<tr>
-<td>UC-04</td>
-<td>Issue status updated</td>
-</tr>
-<tr>
-<td>UC-05</td>
-<td>Flag recorded</td>
-</tr>
-<tr>
-<td>UC-06</td>
-<td>Issue visibility changed</td>
-</tr>
-<tr>
-<td>UC-07</td>
-<td>User roles updated</td>
-</tr>
-<tr>
-<td>UC-08</td>
-<td>Password changed and session cleared</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="7-assumptions"><strong>7) Assumptions</strong></h2>
-<ul>
-<li>All communications are secured with <strong>HTTPS</strong> (SSL from AWS ACM).  </li>
-<li>Passwords are hashed before storage.  </li>
-<li>Role-based access ensures no unauthorized data access.  </li>
-</ul>
-<hr />
+<!-- ## **6) Postconditions Summary**
+
+| Use Case | Result |
+|-----------|--------|
+| UC-01 | User account created |
+| UC-02 | Session started (cookie issued) |
+| UC-03 | Issue created in DB |
+| UC-04 | Issue status updated |
+| UC-05 | Flag recorded |
+| UC-06 | Issue visibility changed |
+| UC-07 | User roles updated |
+| UC-08 | Password changed and session cleared |
+
+--- -->
+<!-- 
+## **5) Assumptions**
+- All communications are secured with **HTTPS** (SSL from AWS ACM).  
+- Passwords are hashed before storage.  
+- Role-based access ensures no unauthorized data access.  
+
+--- -->
 
 
 
