@@ -75,7 +75,7 @@ Using **AWS RDS** offloads database management, backups, and scaling. It provide
 - Database credentials are stored securely in the `.env` file and loaded at runtime.  
 
 ---
-
+<!-- 
 ## **6. Deployment & DevOps Setup**
 
 | **Tool / Process** | **Purpose** |
@@ -84,11 +84,11 @@ Using **AWS RDS** offloads database management, backups, and scaling. It provide
 | **Docker Compose** | Orchestrates all services (frontend, backend) together. |
 | **Environment Variables (.env)** | Holds credentials for JWT, AWS, and database. |
 | **Restart Policy** | Docker automatically restarts containers (`restart: always`). |
+ -->
 
+<!-- --- -->
 
----
-
-## **8. Security & Best Practices**
+## **6. Security & Best Practices**
 
 | **Feature** | **Implementation** |
 |--------------|--------------------|
@@ -105,7 +105,7 @@ Using **AWS RDS** offloads database management, backups, and scaling. It provide
 
 ---
 
-## **9. System Deployment Workflow**
+## **7. System Deployment Workflow**
 
 ### **Step-by-Step Deployment Flow**
 1. Code pushed to GitHub repository.  

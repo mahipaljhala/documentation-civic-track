@@ -2,7 +2,7 @@
 
 ## **2. Entity Relationship Diagram (ERD)**
 
-![ERD](../images/erdd.png)
+![ERD](../images/the-erd.png)
 
 The ERD represents relationships between **users**, **roles**, **issues**, **authorities**, **flags**, and **logs**.  
 It forms the backbone of the data model for CivicTrack.
@@ -68,7 +68,7 @@ Stores each civic department or administrative authority.
 | `region` | VARCHAR(100) | NOT NULL | Area of operation |
 | `department_id` | BIGINT | FK → `departments.id` | Linked department |
 | `address` | TEXT | NULL | Physical address |
-| `coverage_area` | GEOGRAPHY(Polygon) | NULL | Geo-boundary |
+<!-- | `coverage_area` | GEOGRAPHY(Polygon) | NULL | Geo-boundary | -->
 | `created_at` | TIMESTAMPTZ | DEFAULT now() | Created date |
 | `updated_at` | TIMESTAMPTZ | DEFAULT now() | Updated date |
 
@@ -178,6 +178,7 @@ Stores historical changes for issue status updates and comments.
 | `comment` | TEXT | NULL |
 | `created_at` | TIMESTAMPTZ | DEFAULT now() |
 | `updated_at` | TIMESTAMPTZ | DEFAULT now() |
+| `deleted_at` | TIMESTAMPTZ | NULLABLE | Soft delete marker |
 
 ---
 
@@ -197,19 +198,27 @@ CREATE TYPE issue_status AS ENUM ('reported', 'in_progress', 'resolved');
 ---
 ## **6. Index Summary**
 
-| **Table** | **Index Name** | **Index Type** | **Columns** | **Purpose / Use Case** | **SQL Example** |
+<!-- | **Table** | **Index Name** | **Index Type** | **Columns** | **Purpose / Use Case** | **SQL Example** |
 |-----------|----------------|----------------|-------------|-------------------------|------------------|
 | `users` | `idx_users_email_unique` | UNIQUE (BTREE) | `email` | Prevent duplicate user accounts and speed up authentication | `CREATE UNIQUE INDEX idx_users_email_unique ON users(email);` |
 | `user_issue` | `idx_user_issue_status` | BTREE | `status` | Quickly filter issues by status (`reported`, `in_progress`, `resolved`) | `CREATE INDEX idx_user_issue_status ON user_issue(status);` |
 | `user_issue` | `idx_user_issue_authority_status` | COMPOSITE (BTREE) | `authority_id, status` | Speed up authority dashboards when filtering issues by both status and assigned authority | `CREATE INDEX idx_user_issue_authority_status ON user_issue(authority_id, status);` |
-| `user_issue` | `idx_user_issue_lat_lon` | COMPOSITE (BTREE) | `latitude, longitude` | Optimize location-based search using bounding box + Haversine queries | `CREATE INDEX idx_user_issue_lat_lon ON user_issue(latitude, longitude);` |
 | `roles` | `idx_roles_name_unique` | UNIQUE (BTREE) | `name` | Ensure no duplicate roles exist in the system | `CREATE UNIQUE INDEX idx_roles_name_unique ON roles(name);` |
 | `issues` | `idx_issues_slug_unique` | UNIQUE (BTREE) | `slug` | Ensure issue category slugs are unique and URL-safe | `CREATE UNIQUE INDEX idx_issues_slug_unique ON issues(slug);` |
 | `user_role` | `idx_user_role_unique` | UNIQUE COMPOSITE (BTREE) | `user_id, role_id` | Prevent assigning the same role to a user more than once | `CREATE UNIQUE INDEX idx_user_role_unique ON user_role(user_id, role_id);` |
 | `authority_user` | `idx_authority_user_unique` | UNIQUE COMPOSITE (BTREE) | `authority_id, user_id` | Enforce one-to-one mapping between authority and user account | `CREATE UNIQUE INDEX idx_authority_user_unique ON authority_user(authority_id, user_id);` |
-| `logs` | `idx_logs_issue_id` | BTREE | `issue_id` | Fetch issue logs quickly for timelines and history views | `CREATE INDEX idx_logs_issue_id ON logs(issue_id);` |
-| `logs` | `idx_logs_user_activity` | COMPOSITE (BTREE) | `updated_by, created_at` | Track user actions chronologically for analytical or admin audit purposes | `CREATE INDEX idx_logs_user_activity ON logs(updated_by, created_at);` |
+| `logs` | `idx_logs_issue_id` | BTREE | `issue_id` | Fetch issue logs quickly for timelines and history views | `CREATE INDEX idx_logs_issue_id ON logs(issue_id);` | -->
 
+
+
+
+
+| **Table**         | **Index Name**                  | **Index Type** | **Columns**    | **Purpose / Use Case**                                                        |
+| ----------------- | ------------------------------- | -------------- | -------------- | ----------------------------------------------------------------------------- |
+| `users`           | `idx_users_email_unique`        | UNIQUE (BTREE) | `email`        | Prevent duplicate user accounts and speed up authentication                   |
+| `user_issue`      | `idx_user_issue_status`         | BTREE          | `status`       | Quickly filter issues by their status (`reported`, `in_progress`, `resolved`) |
+| `user_issue`      | `idx_user_issue_authority`      | BTREE          | `authority_id` | Efficiently fetch issues assigned to a specific authority                     |
+| `logs`            | `idx_logs_issue_id`             | BTREE          | `issue_id`     | Retrieve activity logs for a particular issue quickly                         |
+| `user_issue_flag` | `idx_user_issue_flag_report_id` | BTREE          | `report_id`    | Enable quick lookup of all flags raised for a specific issue                  |
 
 ---
-

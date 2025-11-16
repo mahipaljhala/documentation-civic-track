@@ -3,9 +3,9 @@
 ---
 
 ## **Level 0 DFD — Context Diagram**
-
+<!-- 
 The Level 0 DFD provides a high-level view of the system and its interactions with external entities.  
-It represents the entire CivicTrack application as a single process and shows how data moves between the system and its users.
+It represents the entire CivicTrack application as a single process and shows how data moves between the system and its users. -->
 
 ![level-0](../images/dfd0.png)
 
@@ -30,7 +30,7 @@ It represents the entire CivicTrack application as a single process and shows ho
 
 ## **Level 1 DFD**
 
-This diagram expands the CivicTrack system into its main functional modules and illustrates internal data flow between entities, processes, and the database.
+<!-- This diagram expands the CivicTrack system into its main functional modules and illustrates internal data flow between entities, processes, and the database. -->
 
 ![level-1](../images/dfd1.png)
 ---

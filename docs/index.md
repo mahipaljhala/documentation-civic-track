@@ -113,8 +113,8 @@ CivicTrack enables efficient coordination between citizens and civic authorities
 
 ---
 
-## **6) System Flow Overview**
-
+<!-- ## **6) System Flow Overview**
+[link](./technical-doc/dfd.md)
 ![systemflow](./images/systemflow.png)
 
 
@@ -124,9 +124,9 @@ System assigns it to Sanitation Authority →
 Authority marks it *In Progress* → then *Resolved* →     
 Citizen receives updated status.
 
----
+--- -->
 
-## **7) Non-Functional Considerations**
+## **6) Non-Functional Considerations**
 
 #### **Scalability**
 - Stateless API supports horizontal scaling on EC2.  
@@ -147,7 +147,7 @@ Citizen receives updated status.
 
 ---
 
-## **8) Security Overview**
+## **7) Security Overview**
 
 - All communication over HTTPS (SSL from AWS ACM).  
 - Cookies used for session authentication.  
@@ -160,13 +160,13 @@ Citizen receives updated status.
 
 ---
 
-## **9) Future Vision**
+## **8) Future Vision**
 
 - Push notifications for live updates.  
 - Analytics dashboard for administrators.  
-- OAuth/SSO login integration.  
+<!-- - OAuth/SSO login integration.   -->
 - Refresh tokens for persistent sessions.  
 - Two-Factor Authentication (2FA) for admins.
-- Geolocation filtering of issue.
+<!-- - Geolocation filtering of issue. -->
 
 ---

@@ -1,11 +1,8 @@
 # **CivicTrack Use Case Document**
 
 ---
-
-## **1) Overview**
-
-This document describes the **primary system interactions (use cases)** of the CivicTrack application.  
-Each use case defines the participating actors, system behavior, and expected outcomes.
+## **1) Use Case Diagram**
+![usecasediagram](./images/image.png)
 
 ---
 
@@ -20,12 +17,7 @@ Each use case defines the participating actors, system behavior, and expected ou
 
 ---
 
-## **3) Use Case Diagram**
-![usecasediagram](./images/image.png)
-
----
-
-## **4) Use Cases**
+## **3) Use Cases**
 
 #### **UC-01: Register User**
 
@@ -139,19 +131,92 @@ Each use case defines the participating actors, system behavior, and expected ou
 
 ---
 
-## **5) Exception Scenarios**
+## **4) Error Scenarios**
 
-| Use Case | Exception | System Response |
-|-----------|------------|-----------------|
-| Register / Login | Invalid input | Display error message |
-| Report Issue | Missing data or invalid image | Prompt user to correct input |
-| Update Status | Unauthorized user | Return `403 Forbidden` |
-| Change Password | Wrong current password | Return error “Invalid credentials” |
-| Flag Issue | Duplicate flag by same user | Reject and notify “Already flagged” |
+
+| Use Case | Error Scenario | System Response |
+|----------|----------------|-----------------|
+| **UC-01: Register User** | Email already exists | Return `409 Conflict` → “Email already in use” |
+| | Invalid input (name/email/password) | Display validation error |
+| | Weak password | “Password must meet security requirements” |
+| | Missing required fields | “Please fill all required fields” |
+| **UC-02: Login** | Wrong email or password | “Invalid credentials” |
+| | Missing email/password | Validation error |
+| **UC-03: Report Issue** | Missing title/category/location | Ask user to complete all fields |
+| | Invalid or corrupted image | “Upload a valid image file” |
+| | User not logged in | Return `401 Unauthorized` |
+| **UC-04: Update Issue Status** | Unauthorized user (not assigned authority) | Return `403 Forbidden` |
+| | Issue does not exist | Return `404 Not Found` |
+| **UC-05: Flag Issue** | Duplicate flag by same user | “You have already flagged this issue” |
+| | Issue does not exist | `404 Not Found` |
+| | User not logged in | `401 Unauthorized` |
+| **UC-06: Review Flagged Issues (Admin)** | Admin not logged in | `401 Unauthorized` |
+| | Flag entry does not exist | `404 Not Found` |
+| | Issue already deleted | “Issue no longer available” |
+| **UC-07: Manage Users (Admin)** | Invalid role assignment | `400 Bad Request` |
+| | User does not exist | `404 Not Found` |
+| **UC-08: Change Password** | Wrong current password | “Invalid current password” |
+| | New password and confirm password mismatch | “Passwords do not match” |
+| | Weak new password | “Password must meet security requirements” |
+| | Missing fields | Validation error |
+| | New password same as old password | “New password cannot be same as old password” |
+
+
+<!-- | Use Case | Error Scenario | System Response |
+|----------|--------------------|-----------------|
+| **UC-01: Register User** | Email already exists | Return `409 Conflict` → “Email already in use” |
+| | Invalid input (name/email/password) | Display validation error |
+| | Weak password | “Password must meet security requirements” |
+| | Missing required fields | “Please fill all required fields” |
+| | DB write failure | Return `500 Internal Server Error` |
+| | Email format invalid | “Enter a valid email” | 
+| **UC-02: Login** | Wrong email or password | “Invalid credentials” |
+| | User account deleted/deactivated | Return `403 Forbidden` |
+| | Missing email/password | Validation error |
+| | Invalid cookie/session | “Session expired, login again” |
+| | Database offline | `500 Internal Server Error` |
+| **UC-03: Report Issue** | Missing title/category/location | Ask user to complete all fields |
+| | Invalid or corrupted image | “Upload a valid image file” |
+| | S3 upload failure | Return `500` → “Image upload failed” |
+| | User not logged in | Return `401 Unauthorized` |
+| | Invalid coordinates | “Invalid location data” |
+| | Issue category doesn’t exist | Return `400 Bad Request` |
+| | DB insertion failure | Return `500 Internal Server Error` |
+| **UC-04: Update Issue Status** | Unauthorized user (not assigned authority) | Return `403 Forbidden` |
+| | Issue does not exist | Return `404 Not Found` |
+| | Invalid status value | Return `400 Bad Request` |
+| | Trying to update an already resolved issue | “Issue already resolved” |
+| | Logs table insert fails | Return `500 Internal Server Error` |
+| **UC-05: Flag Issue** | Duplicate flag by same user | “You have already flagged this issue” |
+| | Issue does not exist | `404 Not Found` |
+| | Invalid flag type | `400 Bad Request` |
+| | User not logged in | `401 Unauthorized` |
+| | Flag limit reached | Auto-hide triggered, notify user |
+| **UC-06: Review Flagged Issues (Admin)** | Admin not logged in | `401 Unauthorized` |
+| | Admin role missing | `403 Forbidden` |
+| | Flag entry does not exist | `404 Not Found` |
+| | Issue already deleted | “Issue no longer available” |
+| | DB update failure | `500 Internal Server Error` |
+| **UC-07: Manage Users (Admin)** | Invalid role assignment | `400 Bad Request` |
+| | User does not exist | `404 Not Found` |
+| | Admin trying to remove own admin access | “Operation not allowed” |
+| | Role already assigned | “Role already exists for this user” |
+| | Unauthorized (non-admin) | `403 Forbidden` |
+| | DB save failure | `500 Internal Server Error` |
+| **UC-08: Change Password** | Wrong current password | “Invalid current password” |
+| | New password and confirm password mismatch | “Passwords do not match” |
+| | Weak new password | “Password must meet security requirements” |
+| | Missing fields | Validation error |
+| | User not logged in | `401 Unauthorized` |
+| | Account deleted/deactivated | `403 Forbidden` |
+| | Database update failure | `500 Internal Server Error` |
+| | New password same as old password | “New password cannot be same as old password” |
+| | Hashing failure (bcrypt error) | `500 Internal Server Error` | -->
+
 
 ---
 
-## **6) Postconditions Summary**
+<!-- ## **6) Postconditions Summary**
 
 | Use Case | Result |
 |-----------|--------|
@@ -164,11 +229,11 @@ Each use case defines the participating actors, system behavior, and expected ou
 | UC-07 | User roles updated |
 | UC-08 | Password changed and session cleared |
 
----
-
-## **7) Assumptions**
+--- -->
+<!-- 
+## **5) Assumptions**
 - All communications are secured with **HTTPS** (SSL from AWS ACM).  
 - Passwords are hashed before storage.  
 - Role-based access ensures no unauthorized data access.  
 
----
+--- -->
