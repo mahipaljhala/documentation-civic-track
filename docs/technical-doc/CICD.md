@@ -1,0 +1,117 @@
+
+#  CI/CD Pipeline Documentation
+
+This project uses **Continuous Integration (CI)** and **Continuous Deployment (CD)** to automate testing, building, and deployment.
+The goal is to ensure stable, fast, and consistent releases.
+
+---
+
+## 🔧 Continuous Integration (CI)
+
+
+##### 1. Checkout repository
+- name: Checkout repository
+  uses: actions/checkout@v3
+
+##### 2. Setup Node.js (Latest LTS)
+- name: Setup Node.js (Latest LTS)
+  uses: actions/setup-node@v3
+  with:
+    node-version: '20'
+
+##### 3. Install dependencies
+- name: Install dependencies
+  run: npm install
+
+
+---
+
+##  Continuous Deployment (CD)
+
+
+
+## GitHub Actions Workflow
+
+```yaml
+
+name: Deploy Backend to EC2
+
+on:
+  push:
+    branches:
+      - working-project
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js (Latest LTS)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Copy project to EC2
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "."
+          target: "~/civictrack-backend"
+
+      - name: Restart Backend on EC2
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd ~/civictrack-backend
+
+            # Re-install dependencies
+            npm install
+
+            # Create .env file properly
+            cat <<EOF > .env
+            PORT=${{ secrets.PORT }}
+            NODE_ENV=${{ secrets.NODE_ENV }}
+
+            DB_NAME=${{ secrets.DB_NAME }}
+            DB_USER=${{ secrets.DB_USER }}
+            DB_PASS=${{ secrets.DB_PASS }}
+            DB_HOST=${{ secrets.DB_HOST }}
+            DB_PORT=${{ secrets.DB_PORT }}
+
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            JWT_SALT=${{ secrets.JWT_SALT }}
+            JWT_EXPIRES_IN=${{ secrets.JWT_EXPIRES_IN }}
+
+            FRONTEND_ORIGIN=${{ secrets.FRONTEND_ORIGIN }}
+
+            AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            AWS_S3_BUCKET=${{ secrets.AWS_S3_BUCKET }}
+            AWS_REGION=${{ secrets.AWS_REGION }}
+            AWS_S3_ACL=${{ secrets.AWS_S3_ACL }}
+
+            MAX_ISSUE_IMAGES=${{ secrets.MAX_ISSUE_IMAGES }}
+            EOF
+
+            # Install PM2 if missing
+            sudo npm install -g pm2
+
+            # Restart server
+            pm2 delete civictrack-backend || true
+            pm2 start server.js --name "civictrack-backend" 
+
+
+```
+
+---

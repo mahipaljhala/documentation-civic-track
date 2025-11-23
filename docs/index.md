@@ -91,21 +91,21 @@ CivicTrack enables efficient coordination between citizens and civic authorities
 ## **5) Tech Stack**
 
 #### **Frontend**
-- **React.js (Vite)** – Component-based architecture for fast UI rendering.  
-- **Tailwind CSS** – Modern, responsive design.  
+- **React.js (Vite)** – Component-based architecture for fast UI rendering.   
 - **PWA Support** – Installable and mobile-friendly.
 
 #### **Backend**
 - **Node.js + Express.js** – RESTful API layer and routing.  
 - **Sequelize ORM** – PostgreSQL integration.  
 - **Multer + AWS SDK** – Image uploads to AWS S3.  
-- **Helmet, CORS, Express Validator** – Security and input validation.
+- **CORS, Express Validator** – Security and input validation.
 
 #### **Database**
 - **PostgreSQL (AWS RDS)** – Secure and scalable relational data storage.
 
 #### **Cloud & Hosting**
-- **AWS EC2** – Application hosting (frontend + backend).  
+- **AWS EC2** – Application hosting (backend).  
+- **Vercel** – Application hosting (frontend).  
 - **AWS RDS** – Managed PostgreSQL database.  
 - **AWS S3** – Image storage via pre-signed URLs.  
 - **AWS Certificate Manager (ACM)** – SSL/TLS certificates for HTTPS.  
@@ -149,7 +149,7 @@ Citizen receives updated status.
 
 ## **7) Security Overview**
 
-- All communication over HTTPS (SSL from AWS ACM).  
+- All communication over HTTPS (SSL from cerbot).  
 - Cookies used for session authentication.  
 - Passwords hashed and stored securely.  
 - RDS connections encrypted (SSL mode).  

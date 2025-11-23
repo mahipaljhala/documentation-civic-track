@@ -2,7 +2,7 @@
 
 ## **2. Entity Relationship Diagram (ERD)**
 
-![ERD](../images/the-erd.png)
+![ERD](../images/RD.png)
 
 The ERD represents relationships between **users**, **roles**, **issues**, **authorities**, **flags**, and **logs**.  
 It forms the backbone of the data model for CivicTrack.

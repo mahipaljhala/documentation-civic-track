@@ -1,1 +1,1 @@
-![architecture](../images/aws-arch.png)
+![architecture](../images/archi.jpeg)

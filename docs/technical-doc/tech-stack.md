@@ -9,9 +9,9 @@
 | **Backend** | Node.js + Express.js + Sequelize ORM | Handles REST APIs, authentication, and communicates with PostgreSQL (via RDS). |
 | **Database** | **AWS RDS (PostgreSQL)** | Managed relational database for users, issues, logs, and categories. |
 | **Storage** | AWS S3 | Stores uploaded issue images securely. |
-| **Deployment** | Docker + Docker Compose (on AWS EC2) | Orchestrates containerized backend and frontend. |
-| **Security** | JWT (HTTP-only Cookies), bcrypt, Helmet, SSL/TLS | Ensures authentication, encryption, and secure communication. |
-| **SSL/TLS** | AWS Certificate Manager | Enables HTTPS for secure frontend and backend access. |
+| **Deployment** | AWS EC2| backend on EC2. |
+| **Security** | JWT (HTTP-only Cookies), bcrypt, SSL/TLS | Ensures authentication, encryption, and secure communication. |
+| **SSL/TLS** | Cerbot+nginx | Enables HTTPS for secure frontend and backend access. |
 
 ---
 
@@ -39,7 +39,7 @@ React and Vite provide fast performance, modular structure, and easy scalability
 | **JWT (HTTP-only Cookie)** | Manages secure authentication sessions. |
 | **Multer + AWS SDK** | Handles image uploads directly to S3. |
 | **bcrypt** | Secures user passwords through hashing. |
-| **Helmet + CORS + Express Validator** | Adds security, sanitization, and validation layers. |
+| **CORS + Express Validator** | Adds security, sanitization, and validation layers. |
 
 **Reason for Choice:**  
 Express and Sequelize provide flexibility and maintainable API structure. Using JWT with HTTP-only cookies prevents XSS token leaks.
@@ -63,11 +63,12 @@ Using **AWS RDS** offloads database management, backups, and scaling. It provide
 
 | **Service** | **Purpose** |
 |--------------|-------------|
-| **AWS EC2** | Hosts the Dockerized backend and frontend containers. |
+| **AWS EC2** | Hosts backend . |
+| **Vercel** | Hosts frontend . |
 | **AWS RDS (PostgreSQL)** | Stores all structured application data. |
 | **AWS S3** | Manages image uploads. |
-| **AWS Certificate Manager (ACM)** | Issues SSL certificates for HTTPS encryption. |
-| **AWS Route53** | DNS. |
+| **Cerbot** | Issues SSL certificates for HTTPS encryption. |
+| **Hostinger-nameserver** | DNS. |
 
 **RDS Networking Setup:**
 - EC2 and RDS are deployed within the **same VPC** for secure, private communication.  
@@ -95,13 +96,9 @@ Using **AWS RDS** offloads database management, backups, and scaling. It provide
 | **Authentication** | JWT stored in HTTP-only cookies. |
 | **Password Protection** | bcrypt for salted password hashing. |
 | **Validation** | Express Validator for input sanitization. |
-| **Encryption** | HTTPS with AWS ACM certificates. |
+| **Encryption** | HTTPS with cerbot certificates. |
 | **Access Control** | Role-based access (Citizen, Authority, Admin). |
-
-**Security Measures in AWS RDS:**
-- Encryption at rest using AWS KMS.  
-- Connection limited to private subnet within VPC.  
-- Parameter groups configured for optimized performance.  
+ 
 
 ---
 
@@ -116,7 +113,7 @@ Using **AWS RDS** offloads database management, backups, and scaling. It provide
    - `frontend` (React.js PWA)  
 5. Backend connects securely to RDS PostgreSQL instance.  
 6. Image uploads handled by S3 with public read access.  
-7. AWS ACM ensures HTTPS for all communication.  
+7. Cerbot+nginx ensures HTTPS for all communication.  
 
 <!-- **Ports Configuration:**.   
 
